@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iPhone 20 系列 AI 导购 Chatflow 作业报告</title>
+<style>
+  :root{
+    --bg:#f5f7fb;--card:#fff;--ink:#20242c;--sub:#616a78;--line:#dfe3ea;
+    --blue:#2457e6;--green:#168a5a;--amber:#c46b0c;--red:#c93a3a;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    line-height:1.74;font-size:15px;}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 80px;}
+  header{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:20px 24px 16px;}
+  h1{font-size:26px;margin:0 0 8px;line-height:1.35;}
+  .meta{color:var(--sub);font-size:13px;}
+  h2{font-size:20px;margin:38px 0 12px;padding-left:11px;border-left:4px solid var(--blue);}
+  h3{font-size:16px;margin:12px 0 7px;}
+  p{margin:8px 0;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px 20px;margin:14px 0;}
+  .lead{background:#eef4ff;border-color:#cbdaff;}
+  .notice{background:#f8fafc;border-color:#e5e9ef;}
+  .warn{background:#fff6e8;border-color:#f0d9ad;}
+  .mini{font-size:12.5px;color:var(--sub);}
+  .tag{display:inline-block;padding:2px 10px;border-radius:16px;font-size:12px;font-weight:600;color:#fff;}
+  .t-blue{background:var(--blue);}.t-green{background:var(--green);}.t-amber{background:var(--amber);}
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:11px 16px;margin:14px 0;font-size:13.5px;}
+  .toc a{color:var(--blue);text-decoration:none;margin-right:16px;white-space:nowrap;}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .flow-card{border:1px solid var(--line);border-radius:8px;background:#fcfcfd;padding:14px 15px;min-height:130px;}
+  .flow-card b{color:var(--blue);}
+  .num{display:inline-block;width:25px;height:25px;border-radius:6px;background:var(--blue);color:#fff;text-align:center;line-height:25px;font-size:13px;margin-right:7px;}
+  table{width:100%;border-collapse:collapse;background:#fff;font-size:13.5px;margin:12px 0;border:1px solid var(--line);}
+  th,td{padding:9px 11px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;}
+  th{background:#eef1f6;font-weight:600;}
+  tr:last-child td{border-bottom:none;}
+  .link{color:var(--blue);text-decoration:none;word-break:break-all;}
+  footer{margin-top:40px;padding-top:15px;border-top:1px solid var(--line);color:var(--sub);font-size:12px;}
+  @media(max-width:860px){.grid3,.grid2{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>iPhone 20 系列 AI 导购 Chatflow 作业报告</h1>
+    <div class="meta">主动接待 · 客户记忆 · 销售方法论驱动成交 · 2026-09-09</div>
+  </header>
+
+  <div class="card lead">
+    <h2 style="border:none;padding:0;margin:0 0 8px">结论</h2>
+    <p style="margin:0;font-size:17px"><b>这套 Chatflow 的核心价值，是把“等客户来问”的机器人变成“主动推进销售”的导购助手。</b></p>
+    <p style="margin:10px 0 0">它服务 iPhone 20 系列四款机型，从客户进入应用开始主动问候，并在多轮对话中持续记录客户画像、识别意图、选择合适话术推进到成交。销售行为不是由一条固定回复完成，而是由“意图判断 → 记忆更新 → 分支回复 → 再次倾听”的循环完成。</p>
+  </div>
+
+  <div class="toc">
+    <b>目录：</b>
+    <a href="#summary">项目定位</a>
+    <a href="#problem">业务问题</a>
+    <a href="#flow">对话闭环</a>
+    <a href="#intents">六个场景节点</a>
+    <a href="#memory">会话记忆</a>
+    <a href="#platform">Chatflow 选择</a>
+    <a href="#deploy">落地方式</a>
+  </div>
+
+  <h2 id="summary">项目定位</h2>
+  <div class="card">
+    <p>这个项目面向 iPhone 20、iPhone 20 Air、iPhone 20 Pro 和 iPhone 20 Pro Max 的购买咨询场景，目标是让 AI 导购具备三个能力：第一，能主动开口，而不是等访客先提问；第二，能记住客户说过的话，并把信息用于后续推荐；第三，能按照销售阶段推进，从了解客户逐步过渡到成交。</p>
+    <p class="mini">演示地址：<a class="link" href="https://udify.app/chat/KrAKaMxS8do24kBV" target="_blank">https://udify.app/chat/KrAKaMxS8do24kBV</a></p>
+    <p>项目使用的商品信息来自课程模拟设定，正式部署时可以替换为任意真实产品。导购框架、记忆变量、意图路由和成交流程不需要因为产品变化而重做。</p>
+  </div>
+
+  <h2 id="problem">业务问题</h2>
+  <div class="card">
+    <p>零售导购最典型的损耗发生在接待、记忆和方法论三个层面。营业时间之外没有人工接待，客户会被漏掉；客户信息记在个人脑中，换班或换人就可能丢失；销售话术依赖个人经验，遇到同一问题会产生不同回答。</p>
+    <p>AI 导购把这些问题转成流程能力：接待由机器人承担，记忆由会话变量承担，话术由统一分支承担。</p>
+  </div>
+  <table>
+    <tr><th style="width:22%">对比项</th><th style="width:38%">传统人工导购</th><th>本项目 AI 导购</th></tr>
+    <tr><td><b>接待时间</b></td><td>受排班影响，高峰容易漏客</td><td>进入应用即可接待，不依赖营业时间</td></tr>
+    <tr><td><b>客户记忆</b></td><td>依赖导购个人记忆，换人后断裂</td><td>每次回复前重写客户画像，保持连续</td></tr>
+    <tr><td><b>推荐依据</b></td><td>凭经验和临场状态</td><td>读取预算、用途、顾虑后再推荐</td></tr>
+    <tr><td><b>成交路径</b></td><td>多数时间被动回答</td><td>按流程主动追问并最终引导下单</td></tr>
+  </table>
+
+  <h2 id="flow">对话闭环</h2>
+  <div class="card">
+    <p>对话过程不是“问答一次就结束”，而是由五个动作构成闭环：AI 主动问候 → 客户说话 → 更新画像 → 判断本次意图 → 按分支生成回答。回答完成后继续等待下一句，因此下一轮可以站在上一轮已知信息的基础上继续推进。</p>
+  </div>
+  <div class="grid3">
+    <div class="flow-card"><b><span class="num">1</span>主动开场</b><p class="mini">客户进入后 AI 先开口，把对话引向需求了解。</p></div>
+    <div class="flow-card"><b><span class="num">2</span>画像更新</b><p class="mini">每次用户发言后合并历史记录，重新生成 Persona。</p></div>
+    <div class="flow-card"><b><span class="num">3</span>意图分类</b><p class="mini">识别这句话属于哪类业务意图，送入对应分支。</p></div>
+    <div class="flow-card"><b><span class="num">4</span>分支回复</b><p class="mini">分支按预设目标组织话术，不跨场景随意发挥。</p></div>
+    <div class="flow-card"><b><span class="num">5</span>记录关键字段</b><p class="mini">预算、用途等值写回会话变量，供后续节点读取。</p></div>
+    <div class="flow-card"><b><span class="num">6</span>等待下一句</b><p class="mini">回复后继续保持对话，直到出现购买意向或结束。</p></div>
+  </div>
+
+  <h2 id="intents">六个场景节点</h2>
+  <p class="mini">每个场景节点对应一类客户发言，节点内部再按任务要求组织回答。</p>
+  <table>
+    <tr><th style="width:20%">节点</th><th style="width:38%">触发情况</th><th>导购动作</th></tr>
+    <tr><td><b>了解客户</b></td><td>第一次发言、只介绍自身情况，或尚未提到具体产品</td><td>提取预算、用途、偏好等关键信息，必要时主动追问</td></tr>
+    <tr><td><b>产品推荐</b></td><td>客户已有预算和用途，需要选择型号</td><td>根据画像从四款机型中选择最合适的一款</td></tr>
+    <tr><td><b>产品问答</b></td><td>询问价格、参数、续航、以旧换新等</td><td>按产品资料准确回答，不编造规格</td></tr>
+    <tr><td><b>异议处理</b></td><td>觉得贵、不想换、机身重、续航不够、比较安卓或还在犹豫</td><td>先识别真实顾虑，再做针对性解释</td></tr>
+    <tr><td><b>成交促成</b></td><td>客户表达购买意愿</td><td>提供下单入口并给出清晰下一步</td></tr>
+    <tr><td><b>日常闲聊</b></td><td>与产品无关的轻松话题</td><td>自然回应，不强行打断对话氛围</td></tr>
+  </table>
+
+  <h2 id="memory">会话记忆</h2>
+  <div class="card">
+    <p>会话变量是本项目的记忆载体。它负责在整段对话中保存客户画像与关键购买条件，使不同分支可以共享信息。客户第一轮提到预算，后续推荐阶段仍能读取该预算，这正是“记住客户”的具体实现。</p>
+  </div>
+  <table>
+    <tr><th style="width:20%">变量</th><th style="width:24%">作用</th><th>更新方式</th></tr>
+    <tr><td><b>Persona</b></td><td>客户画像</td><td>结合对话记忆整体重写，记录需求、偏好、顾虑和购买意向</td></tr>
+    <tr><td><b>预算</b></td><td>购买金额范围</td><td>客户自述或导购主动询问后写入</td></tr>
+    <tr><td><b>用途</b></td><td>主要使用场景</td><td>例如拍照、游戏、办公、日常使用</td></tr>
+    <tr><td><b>顾虑</b></td><td>当前犹豫点</td><td>异议处理分支读取后针对性回应</td></tr>
+  </table>
+
+  <h2 id="platform">Chatflow 选择</h2>
+  <div class="grid2">
+    <div class="card" style="margin:0">
+      <h3>为什么不用一次性 Workflow</h3>
+      <p class="mini">客户不会在一句话内完成全部决策。销售需要连续询问、来回解释、反复比较，最后才进入下单。一次性 Workflow 无法保留上一轮的预算、用途和顾虑，因此不适合本场景。</p>
+    </div>
+    <div class="card" style="margin:0">
+      <h3>为什么选择 Chatflow</h3>
+      <p class="mini">Chatflow 以多轮对话为核心，允许会话变量持续存在并随时更新。意图分类、记忆更新和分支回复可以被放入同一会话循环中，恰好匹配导购“边聊边推进”的结构。</p>
+    </div>
+  </div>
+  <table>
+    <tr><th style="width:20%">对比项</th><th style="width:40%">Workflow</th><th>Chatflow</th></tr>
+    <tr><td><b>交互形式</b></td><td>一次输入、一次输出</td><td>多轮连续对话</td></tr>
+    <tr><td><b>是否记忆</b></td><td>每轮独立，缺少上下文</td><td>会话变量贯穿整段对话</td></tr>
+    <tr><td><b>适合任务</b></td><td>翻译、总结、单次生成</td><td>导购、客服、需要来回确认的场景</td></tr>
+  </table>
+
+  <h2 id="deploy">落地方式</h2>
+  <div class="card">
+    <p>正式投入使用时，导购流程、意图路由、画像变量和成交分支可以保持不变，只需把课程模拟产品资料替换为真实商品信息。如果需要不同市场，还可以单独调整推荐口径、价格展示方式和合规提醒，不必重写整套对话逻辑。</p>
+    <p class="mini">本报告描述的是项目设计逻辑与运行结构；接入真实平台后，还需要通过多轮实测校验分类准确率、追问频次和成交引导的边界。</p>
+  </div>
+
+  <footer>
+    原创作业说明 · 内容按项目功能重新表述 ·
+    商品资料为课程模拟设定，不代表苹果官方信息。
+  </footer>
+</div>
+</body>
+</html>
